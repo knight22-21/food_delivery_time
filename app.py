@@ -1,10 +1,13 @@
 from tensorflow.keras.models import load_model
-from tensorflow.keras.layers import LSTM, Dense
 import streamlit as st
 import numpy as np
 
 # Load Model
-model = load_model("lstm_model.h5")
+@st.cache_resource()  # Cache model for performance
+def load_lstm_model():
+    return load_model("lstm_model.h5")
+
+model = load_lstm_model()
 
 st.title("Food Delivery Time Prediction 🚀")
 
